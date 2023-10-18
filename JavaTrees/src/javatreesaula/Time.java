@@ -37,8 +37,17 @@ public class Time implements Comparable<Time>{
     }
     @Override
     public String toString(){
-            return " Id: " + this.id + " | " + " Nome: " + this.nome;
+            return " Id: " + this.id + " Nome: " + this.nome;
     }
     
+    @Override
+    public boolean equals(Object novoObjeto){
+        if(this == novoObjeto)
+            return true;
+        if(novoObjeto == null || this.getClass() != novoObjeto.getClass())
+            return false;
+        Time outroTime = (Time) novoObjeto;
+        return this.id == outroTime.id;
+    }
     
 }

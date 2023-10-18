@@ -27,6 +27,24 @@ public class BinarySearchTree<T extends Comparable<T>>{
             return raiz; // retorna a raiz atualizada
     }
     
+    //------------------------------------------------------------------------
+    //Busca
+    public T buscar(T dadoBusca){
+        return (T)buscar(raiz, dadoBusca);
+    }
+    
+    private T buscar(Node<T> raiz, T dadoBusca){
+        if(raiz==null)
+            return null;
+        if(raiz.dado.equals(dadoBusca))
+            return raiz.dado;
+        if(dadoBusca.compareTo(raiz.dado)<0)
+            return buscar(raiz.esquerda, dadoBusca);
+        else
+            return buscar(raiz.direita, dadoBusca);
+    }
+    //------------------------------------------------------------------------
+    
     public void preOrder(){
         preOrder(raiz);
     }
@@ -59,18 +77,16 @@ public class BinarySearchTree<T extends Comparable<T>>{
         }// fim 
     }
     
-     public String getTimeDataPreOrder() {
-        StringBuilder dadosTime = new StringBuilder();
-        getTimeDataPreOrder(raiz, dadosTime);
-        return dadosTime.toString();
+    public void preOrder(JTextArea listMostraDados){
+        preOrder(raiz, listMostraDados);
+        listMostraDados.append("\n");
     }
-    
-    public void getTimeDataPreOrder(Node<T> raiz, StringBuilder dadosTime) {
-        if(raiz != null) {
-           dadosTime.append(raiz.dado.toString() + "\n");
-            getTimeDataPreOrder(raiz.esquerda, dadosTime);
-            getTimeDataPreOrder(raiz.direita, dadosTime);
-        }
+    private void preOrder(Node<T> raiz, JTextArea listMostraDados){
+        if(raiz!=null){
+            listMostraDados.append(raiz.dado+" |");
+            preOrder(raiz.esquerda, listMostraDados);
+            preOrder(raiz.direita, listMostraDados);
+        }// fim 
     }
 
     
